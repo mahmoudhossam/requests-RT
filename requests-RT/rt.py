@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+__author__ = 'Mahmoud Hossam'
+__version__ = '0.1'
+
 import requests
 
 class RT:
