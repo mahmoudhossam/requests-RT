@@ -1,0 +1,29 @@
+#!/usr/bin/python
+
+import requests
+
+class RT:
+    def __init__(self, apikey):
+        self.apikey = apikey
+    
+    @staticmethod
+    def make_request(url, params=None):
+        req = requests.get(url, params=params)
+        return req.content
+
+    def search(self, query, page_limit=30, page=1):
+        url = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json'
+        params = {
+                'q': query,
+                'page_limit': page_limit,
+                'page': page,
+                'apikey': self.apikey}
+        return make_request(url, params)
+
+    def box_office(self, limit=10, country='us'):
+        url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json'
+        params = {
+                'limit': limit,
+                'country': country,
+                'apikey': self.apikey}
+        return make_request(url, params=params)
