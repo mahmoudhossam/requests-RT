@@ -19,7 +19,7 @@ setup(
     license = "MIT",
     keywords = "rotten tomatoes rt api wrapper",
     url = "https://github.com/mahmoudhossam/requests-RT",
-    packages=['requests-RT'],
+    packages=['RT'],
     long_description=read('README.rst'),
     classifiers=[
         "Environment :: Console",
