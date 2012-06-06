@@ -5,15 +5,14 @@ __version__ = '0.1'
 
 import requests
 
+def make_request(url, params=None):
+        req = requests.get(url, params=params)
+        return req.content
+
 class RT:
     def __init__(self, apikey):
         self.apikey = apikey
     
-    @staticmethod
-    def make_request(url, params=None):
-        req = requests.get(url, params=params)
-        return req.content
-
     def search(self, query, page_limit=30, page=1):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json'
         params = {
