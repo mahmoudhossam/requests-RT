@@ -16,7 +16,7 @@ setup(
     author = giantbomb.__author__,
     author_email = "mahmoud.h.hanafy@gmail.com",
     description = ("A Python wrapper for the Rotten Tomatoes API."),
-    license = "MIT",
+    license = "BSD",
     keywords = "rotten tomatoes rt api wrapper",
     url = "https://github.com/mahmoudhossam/requests-RT",
     packages=['RT'],
@@ -26,6 +26,6 @@ setup(
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Libraries :: Python Modules",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: BSD License",
     ],
 )
