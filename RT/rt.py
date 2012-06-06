@@ -30,3 +30,30 @@ class RT:
                 'country': country,
                 'apikey': self.apikey}
         return make_request(url, params=params)
+
+    def in_theatres(self, page_limit=16, page=1, country='us'):
+        url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json'
+        params = {
+                'page_limit': page_limit,
+                'country': country,
+                'page': page,
+                'apikey': self.apikey}
+        return make_request(url, params=params)
+
+    def opening(self, limit=16, country='us'):
+        url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json'
+        params = {
+                'limit': limit,
+                'country': country,
+                'apikey': self.apikey}
+        return make_request(url, params=params)
+
+    def upcoming(self, page_limit=16, page=1, country='us'):
+        url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json'
+        params = {
+                'page_limit': page_limit,
+                'country': country,
+                'page': page,
+                'apikey': self.apikey}
+        return make_request(url, params=params)
+
