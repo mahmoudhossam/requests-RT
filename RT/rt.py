@@ -7,7 +7,7 @@ import requests
 
 def make_request(url, params=None):
         req = requests.get(url, params=params)
-        return req.content
+        return req.json
 
 class RT:
     def __init__(self, apikey):
