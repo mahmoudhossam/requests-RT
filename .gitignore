@@ -1,2 +1,3 @@
 *.pyc
 *~
+RT/tests.py

@@ -56,3 +56,13 @@ class RT:
                 'apikey': self.apikey}
         return make_request(url, params=params)
 
+
+class Movie:
+    def __init__(self, movie_info):
+        self.cast = movie_info['abridged_cast']
+        self.posters = movie_info['posters']
+        self.rating = movie_info['ratings']
+        self.duration = movie_info['runtime']
+        self.name = movie_info['title']
+        self.year = movie_info['year']
+        self.synopsis = movie_info['synopsis']
