@@ -8,16 +8,18 @@ Uses requests under the hood.
 
 Usage
 ---------
-``from rt import RT
+::  
 
-#set your api key here
-api = RT('API_KEY')
+    from rt import RT
 
-#do your thing
-result = api.search('inception')
+    #set your api key here
+    api = RT('API_KEY')
 
-#if this works, this should print 'inception'
-print(result.name)``
+    #do your thing
+    result = api.search('inception')
+
+    #if this works, this should print 'inception'
+    print(result.name)
 
 License
 ----------
