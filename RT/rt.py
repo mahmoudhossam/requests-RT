@@ -4,10 +4,14 @@ __author__ = 'Mahmoud Hossam'
 __version__ = '0.1'
 
 import requests
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 def make_request(url, params=None):
         req = requests.get(url, params=params)
-        return req.json
+        return req.text
 
 class RT:
     def __init__(self, apikey):
@@ -20,7 +24,10 @@ class RT:
                 'page_limit': page_limit,
                 'page': page,
                 'apikey': self.apikey}
-        return make_request(url, params)
+        response = make_request(url, params)
+        if response:
+            movies = json.loads(response)['movies'][0]
+            return Movie(movies)
 
     def box_office(self, limit=10, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json'
