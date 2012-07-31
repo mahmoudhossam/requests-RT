@@ -66,10 +66,14 @@ class RT:
 
 class Movie:
     def __init__(self, movie_info):
-        self.cast = movie_info['abridged_cast']
-        self.posters = movie_info['posters']
-        self.rating = movie_info['ratings']
-        self.duration = movie_info['runtime']
-        self.name = movie_info['title']
-        self.year = movie_info['year']
-        self.synopsis = movie_info['synopsis']
+        self.cast = movie_info.get('abridged_cast')
+        self.posters = movie_info.get('posters')
+        self.rating = movie_info.get('ratings')
+        self.duration = movie_info.get('runtime')
+        self.name = movie_info.get('title')
+        self.year = movie_info.get('year')
+        self.synopsis = movie_info.get('synopsis')
+        self.critics_score = movie_info.get('critics_score')
+        self.critics_rating = movie_info.get('critics_rating')
+        self.audience_score = movie_info.get('audience_score')
+        self.audience_rating = movie_info.get('audience_rating')
