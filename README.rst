@@ -4,7 +4,7 @@ requests-RT
 
 A python interface for the Rotten Tomatoes API.
 
-Uses requests under the hood.
+Uses `requests <https://github.com/kennethreitz/requests>`_ under the hood.
 
 Usage
 ---------
