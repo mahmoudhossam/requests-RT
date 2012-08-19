@@ -1,4 +1,5 @@
 *.pyc
 *~
-RT/tests.py
 *.swp
+.env
+venv/
