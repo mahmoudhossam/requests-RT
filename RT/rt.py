@@ -78,3 +78,7 @@ class Movie:
         self.critics_rating = self.ratings.get('critics_rating')
         self.audience_score = self.ratings.get('audience_score')
         self.audience_rating = self.ratings.get('audience_rating')
+        self.genres = movie_info.get('genres')
+        self.studio = movie_info.get('studio')
+        self.links = movie_info.get('links')
+
