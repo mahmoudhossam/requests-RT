@@ -10,7 +10,7 @@ Usage
 ---------
 ::  
 
-    from rt import RT
+    from RT import RT
 
     #set your api key here
     api = RT('API_KEY')
