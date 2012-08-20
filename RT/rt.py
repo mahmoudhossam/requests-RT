@@ -26,8 +26,11 @@ class RT:
                 'apikey': self.apikey}
         response = make_request(url, params)
         if response:
-            movies = json.loads(response)['movies'][0]
-            return Movie(movies)
+            movies = json.loads(response)['movies']
+            if len(movies) > 1:
+                return [Movie(m) for m in movies]
+            else:
+                return Movie(movies[0])
 
     def box_office(self, limit=10, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json'
@@ -66,6 +69,7 @@ class RT:
 
 class Movie:
     def __init__(self, movie_info):
+        self.movie_id = movie_info.get('id')
         self.cast = movie_info.get('abridged_cast')
         self.posters = movie_info.get('posters')
         self.rating = movie_info.get('ratings')
