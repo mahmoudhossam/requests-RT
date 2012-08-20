@@ -9,7 +9,7 @@ try:
 except ImportError:
     import json
 
-def make_request(url, params=None):
+def get_response(url, params=None):
         req = requests.get(url, params=params)
         return req.text
 
@@ -24,7 +24,7 @@ class RT:
                 'page_limit': page_limit,
                 'page': page,
                 'apikey': self.apikey}
-        response = make_request(url, params)
+        response = get_response(url, params)
         if response:
             movies = json.loads(response)['movies']
             if len(movies) > 1:
@@ -38,7 +38,7 @@ class RT:
                 'limit': limit,
                 'country': country,
                 'apikey': self.apikey}
-        return make_request(url, params=params)
+        return get_response(url, params=params)
 
     def in_theatres(self, page_limit=16, page=1, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json'
@@ -47,7 +47,7 @@ class RT:
                 'country': country,
                 'page': page,
                 'apikey': self.apikey}
-        return make_request(url, params=params)
+        return get_response(url, params=params)
 
     def opening(self, limit=16, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json'
@@ -55,7 +55,7 @@ class RT:
                 'limit': limit,
                 'country': country,
                 'apikey': self.apikey}
-        return make_request(url, params=params)
+        return get_response(url, params=params)
 
     def upcoming(self, page_limit=16, page=1, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json'
@@ -64,7 +64,7 @@ class RT:
                 'country': country,
                 'page': page,
                 'apikey': self.apikey}
-        return make_request(url, params=params)
+        return get_response(url, params=params)
 
 
 class Movie:
