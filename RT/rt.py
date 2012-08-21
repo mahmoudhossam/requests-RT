@@ -73,6 +73,7 @@ class RT:
         return get_movies(response)
 
 class Movie:
+    
     def __init__(self, movie_info):
         self.movie_id = movie_info.get('id')
         self.cast = movie_info.get('abridged_cast')
@@ -91,3 +92,13 @@ class Movie:
         self.studio = movie_info.get('studio')
         self.links = movie_info.get('links')
 
+class Review:
+
+    def __init__(self, review_info):
+        self.critic = review_info.get('critic')
+        self.date = review_info.get('date')
+        self.quote = review_info.get('quote')
+        self.publication = review_info.get('publication')
+        self.freshness = review_info.get('freshness')
+        self.original_score = review_info.get('original_score')
+        self.link = review_info.get('links').get('review')
