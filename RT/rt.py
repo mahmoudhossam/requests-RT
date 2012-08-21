@@ -10,8 +10,15 @@ except ImportError:
     import json
 
 def get_response(url, params=None):
-        req = requests.get(url, params=params)
-        return req.text
+    req = requests.get(url, params=params)
+    return req.text
+
+def get_movies(response):
+    movies = json.loads(response)['movies']
+    if len(movies) > 1:
+        return [Movie(m) for m in movies]
+    else:
+        return Movie(movies[0])
 
 class RT:
     def __init__(self, apikey):
@@ -25,20 +32,16 @@ class RT:
                 'page': page,
                 'apikey': self.apikey}
         response = get_response(url, params)
-        if response:
-            movies = json.loads(response)['movies']
-            if len(movies) > 1:
-                return [Movie(m) for m in movies]
-            else:
-                return Movie(movies[0])
-
+        return get_movies(response)
+                           
     def box_office(self, limit=10, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json'
         params = {
                 'limit': limit,
                 'country': country,
                 'apikey': self.apikey}
-        return get_response(url, params=params)
+        response = get_response(url, params=params)
+        return get_movies(response)
 
     def in_theatres(self, page_limit=16, page=1, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json'
@@ -47,7 +50,8 @@ class RT:
                 'country': country,
                 'page': page,
                 'apikey': self.apikey}
-        return get_response(url, params=params)
+        response = get_response(url, params=params)
+        return get_movies(response)
 
     def opening(self, limit=16, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json'
@@ -55,7 +59,8 @@ class RT:
                 'limit': limit,
                 'country': country,
                 'apikey': self.apikey}
-        return get_response(url, params=params)
+        response = get_response(url, params=params)
+        return get_movies(response)
 
     def upcoming(self, page_limit=16, page=1, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json'
@@ -64,8 +69,8 @@ class RT:
                 'country': country,
                 'page': page,
                 'apikey': self.apikey}
-        return get_response(url, params=params)
-
+        response = get_response(url, params=params)
+        return get_movies(response)
 
 class Movie:
     def __init__(self, movie_info):
