@@ -20,6 +20,14 @@ def _get_movies(response):
     else:
         return Movie(movies[0])
 
+def _get_reviews(response):
+    reviews =  json.loads(response)['reviews']
+    if len(reviews) > 1:
+        return [Review(r) for r in reviews]
+    else:
+        return Review(reviews[0])
+
+
 class RT:
     def __init__(self, apikey):
         self.apikey = apikey
@@ -80,6 +88,7 @@ class RT:
                 'page_limit': page_limit,
                 'review_type': review_type}
         response = _get_response(url, params)
+        return _get_reviews(response)
 
 
 class Movie:
