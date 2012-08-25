@@ -72,6 +72,16 @@ class RT:
         response = get_response(url, params=params)
         return get_movies(response)
 
+    def review(self, movie_id, review_type='top_critic', page_limit=20, page=1, country='us'):
+        url = 'http://api.rottentomatoes.com/api/public/v1.0/movies/%s/reviews.json' % movie_id
+        params = {
+                'country': country,
+                'page': page,
+                'page_limit': page_limit,
+                'review_type': review_type}
+        response = get_response(url, params)
+
+
 class Movie:
     
     def __init__(self, movie_info):
