@@ -52,7 +52,7 @@ class RT:
                 'limit': limit,
                 'country': country,
                 'apikey': self.apikey}
-        response = _get_response(url, params=params)
+        response = _get_response(url, params)
         return _get_movies(response)
 
     def in_theatres(self, page_limit=16, page=1, country='us'):
@@ -62,7 +62,7 @@ class RT:
                 'country': country,
                 'page': page,
                 'apikey': self.apikey}
-        response = _get_response(url, params=params)
+        response = _get_response(url, params)
         return _get_movies(response)
 
     def opening(self, limit=16, country='us'):
@@ -71,7 +71,7 @@ class RT:
                 'limit': limit,
                 'country': country,
                 'apikey': self.apikey}
-        response = _get_response(url, params=params)
+        response = _get_response(url, params)
         return _get_movies(response)
 
     def upcoming(self, page_limit=16, page=1, country='us'):
@@ -81,7 +81,7 @@ class RT:
                 'country': country,
                 'page': page,
                 'apikey': self.apikey}
-        response = _get_response(url, params=params)
+        response = _get_response(url, params)
         return _get_movies(response)
 
     def review(self, movie_id, review_type='top_critic', page_limit=20, page=1, country='us'):
@@ -90,13 +90,15 @@ class RT:
                 'country': country,
                 'page': page,
                 'page_limit': page_limit,
-                'review_type': review_type}
+                'review_type': review_type,
+                'apikey': self.apikey}
         response = _get_response(url, params)
         return _get_reviews(response)
 
     def cast(self, movie_id):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/movies/%s/cast.json' % movie_id
-        response = _get_response(url)
+        params = {'apikey': self.apikey}
+        response = _get_response(url, params)
         return _get_cast(response)
 
 
