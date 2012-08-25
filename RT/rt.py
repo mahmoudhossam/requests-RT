@@ -21,11 +21,15 @@ def _get_movies(response):
         return Movie(movies[0])
 
 def _get_reviews(response):
-    reviews =  json.loads(response)['reviews']
+    reviews = json.loads(response)['reviews']
     if len(reviews) > 1:
         return [Review(r) for r in reviews]
     else:
         return Review(reviews[0])
+
+def _get_cast(response):
+    cast = json.loads(response)['cast']
+    return [Actor(a) for a in cast]
 
 
 class RT:
@@ -90,6 +94,11 @@ class RT:
         response = _get_response(url, params)
         return _get_reviews(response)
 
+    def cast(self, movie_id):
+        url = 'http://api.rottentomatoes.com/api/public/v1.0/movies/%s/cast.json' % movie_id
+        response = _get_response(url)
+        return _get_cast(response)
+
 
 class Movie:
     
@@ -121,3 +130,11 @@ class Review:
         self.freshness = review_info.get('freshness')
         self.original_score = review_info.get('original_score')
         self.link = review_info.get('links').get('review')
+
+class Actor:
+
+    def __init__(self, actor_info):
+        self.actor_id = actor_info.get('id')
+        self.name = actor_info.get('name')
+        self.characters = actor_info.get('characters')
+
