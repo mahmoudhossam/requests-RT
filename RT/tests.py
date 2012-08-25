@@ -19,7 +19,11 @@ class TestRT(unittest.TestCase):
     def testMultipleResults(self):
         self.result = self.api.search('Austin Powers')
         self.assertTrue(isinstance(self.result, list))
-
+    
+    def testCast(self):
+        self.result = self.api.cast('770672122')
+        tom_hanks = self.result[0]
+        self.assertEqual(tom_hanks.name, 'Tom Hanks')
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestRT)
