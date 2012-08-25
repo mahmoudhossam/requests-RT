@@ -2,7 +2,7 @@
 requests-RT
 ###########
 
-A python interface for the Rotten Tomatoes API.
+A python interface for the `Rotten Tomatoes API <http://developer.rottentomatoes.com/docs>`_.
 
 Uses `requests <https://github.com/kennethreitz/requests>`_ under the hood.
 
