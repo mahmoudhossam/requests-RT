@@ -7,26 +7,28 @@ import requests
 
 def _get_response(url, params=None):
     req = requests.get(url, params=params)
-    return req.json
+    return req.json()
 
-def _get_movies(response):
+def _get_movies(url, params=None):
+    response = _get_response(url, params)
     movies = response['movies']
     if len(movies) > 1:
         return [Movie(m) for m in movies]
     else:
         return Movie(movies[0])
 
-def _get_reviews(response):
+def _get_reviews(url, params=None):
+    response = _get_response(url, params)
     reviews = response['reviews']
     if len(reviews) > 1:
         return [Review(r) for r in reviews]
     else:
         return Review(reviews[0])
 
-def _get_cast(response):
+def _get_cast(url, params=None):
+    response = _get_response(url, params)
     cast = response['cast']
     return [Actor(a) for a in cast]
-
 
 class RT:
     def __init__(self, apikey):
@@ -39,8 +41,7 @@ class RT:
                 'page_limit': page_limit,
                 'page': page,
                 'apikey': self.apikey}
-        response = _get_response(url, params)
-        return _get_movies(response)
+        return _get_movies(url, params)
                            
     def box_office(self, limit=10, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json'
@@ -48,8 +49,7 @@ class RT:
                 'limit': limit,
                 'country': country,
                 'apikey': self.apikey}
-        response = _get_response(url, params)
-        return _get_movies(response)
+        return _get_movies(url, params)
 
     def in_theatres(self, page_limit=16, page=1, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json'
@@ -58,8 +58,7 @@ class RT:
                 'country': country,
                 'page': page,
                 'apikey': self.apikey}
-        response = _get_response(url, params)
-        return _get_movies(response)
+        return _get_movies(url, params)
 
     def opening(self, limit=16, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json'
@@ -67,8 +66,7 @@ class RT:
                 'limit': limit,
                 'country': country,
                 'apikey': self.apikey}
-        response = _get_response(url, params)
-        return _get_movies(response)
+        return _get_movies(url, params)
 
     def upcoming(self, page_limit=16, page=1, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/upcoming.json'
@@ -77,8 +75,7 @@ class RT:
                 'country': country,
                 'page': page,
                 'apikey': self.apikey}
-        response = _get_response(url, params)
-        return _get_movies(response)
+        return _get_movies(url, params)
 
     def review(self, movie_id, review_type='top_critic', page_limit=20, page=1, country='us'):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/movies/%s/reviews.json' % movie_id
@@ -88,14 +85,12 @@ class RT:
                 'page_limit': page_limit,
                 'review_type': review_type,
                 'apikey': self.apikey}
-        response = _get_response(url, params)
-        return _get_reviews(response)
+        return _get_reviews(url, params)
 
     def cast(self, movie_id):
         url = 'http://api.rottentomatoes.com/api/public/v1.0/movies/%s/cast.json' % movie_id
         params = {'apikey': self.apikey}
-        response = _get_response(url, params)
-        return _get_cast(response)
+        return _get_cast(url, params)
 
 
 class Movie:
