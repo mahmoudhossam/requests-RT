@@ -4,31 +4,27 @@ __author__ = 'Mahmoud Hossam'
 __version__ = '0.1'
 
 import requests
-try:
-    import simplejson as json
-except ImportError:
-    import json
 
 def _get_response(url, params=None):
     req = requests.get(url, params=params)
-    return req.text
+    return req.json
 
 def _get_movies(response):
-    movies = json.loads(response)['movies']
+    movies = response['movies']
     if len(movies) > 1:
         return [Movie(m) for m in movies]
     else:
         return Movie(movies[0])
 
 def _get_reviews(response):
-    reviews = json.loads(response)['reviews']
+    reviews = response['reviews']
     if len(reviews) > 1:
         return [Review(r) for r in reviews]
     else:
         return Review(reviews[0])
 
 def _get_cast(response):
-    cast = json.loads(response)['cast']
+    cast = response['cast']
     return [Actor(a) for a in cast]
 
 
